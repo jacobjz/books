@@ -1,0 +1,30 @@
+<div class="container color-dark">
+  <div class="col">
+    <p>Search for books!</p>
+  </div>
+  <div class="col">
+    <p>Found books ({{itemCount}})</p>
+  </div>
+</div>
+
+<div class="container color-light" [@books]="books.length">
+    <div class="col">
+      <label class="switch">
+  <input type="checkbox" (click)="change()">
+  <span class="slider round">switch criteria!</span>
+</label>
+    <p class="sm">Search by a {{crieria}}:</p>
+
+    <form>
+      <input type="text" class="txt" name="item" placeholder="Life goal.."[(ngModel)]="goalText">
+      <input type="submit" class="btn" [value]="btnText" (click)="getApi()">
+      <span>{{title}}</span>
+    </form>
+  </div>
+  <div class="col">
+    <p class="life-container" *ngFor = "let book of books; let i = index">
+      <span [routerLink]="['/book-details', book.title]">  {{book.title}} by: {{ book.author_name? book.author_name[0] : "none"}}</span>
+
+    </p>
+  </div>
+</div>
