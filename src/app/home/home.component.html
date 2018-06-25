@@ -1,30 +1,25 @@
+
 <div class="container color-dark">
-  <div class="col">
-    <p>Search for books!</p>
+  <div class="col verticalLine">
+    <p>Search books</p>
   </div>
   <div class="col">
-    <p>Found books ({{itemCount}})</p>
+    <p>found ({{itemCount}}) <i *ngIf="isLoading" class="fa fa-spinner fa-spin" style="font-size:24px"></i></p>
   </div>
 </div>
-
-<div class="container color-light" [@books]="books.length">
-    <div class="col">
-      <label class="switch">
-  <input type="checkbox" (click)="change()">
-  <span class="slider round">switch criteria!</span>
-</label>
-    <p class="sm">Search by a {{crieria}}:</p>
+<div class="container color-light" [@goals]="goals.length">
+  <div class="col verticalLine">
+        <p class="sm">by {{criteria}}</p>
 
     <form>
-      <input type="text" class="txt" name="item" placeholder="Life goal.."[(ngModel)]="goalText">
-      <input type="submit" class="btn" [value]="btnText" (click)="getApi()">
-      <span>{{title}}</span>
+      <input type="text" class="txt" name="item" [(ngModel)]="searchText">
+      <input type="submit" class="btn" value="Search" ng-disabled="isLoading" (click)="search()">
     </form>
   </div>
   <div class="col">
-    <p class="life-container" *ngFor = "let book of books; let i = index">
-      <span [routerLink]="['/book-details', book.title]">  {{book.title}} by: {{ book.author_name? book.author_name[0] : "none"}}</span>
-
+    <p class="life-container" *ngFor="let goal of goals; let i = index" (click)="getIsbn(i)">
+    <a>  {{goal.title}} </a> <a [routerLink]="['/details', goal.isbn[0]]">-></a>
     </p>
   </div>
 </div>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">

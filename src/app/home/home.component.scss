@@ -1,19 +1,27 @@
 .container {
     display: grid;
     grid-template-columns: 50% auto;
+    border-radius: 5px 20px 5px;
+}
+.verticalLine {
+  border-right: 2px solid #3D9991;
 }
 .col {
     padding: .4em 1.3em;
 }
 .color-dark {
-    background: #2885C4;
+    background: #3D9970;
 }
 .color-light {
-    background: #57B3F1;
+    background: #39CCCC;
 }
-
+.fa-spinner{
+  margin-left: 40%;
+  z-index: 10;
+}
 input.txt {
     border: 0;
+    border-radius: 2em;
     padding: 1em;
     width: 80%;
     margin-bottom: 2em;
@@ -26,9 +34,10 @@ input.btn {
     color:#003A61;
     margin-bottom:1em;
     cursor:pointer;
+    border-radius: 5px 20px 5px;
 }
 .life-container {
-    background:#3FA0E1;
+    background:#3D9970;
     padding:.5em;
     font-weight:bold;
     cursor:pointer;

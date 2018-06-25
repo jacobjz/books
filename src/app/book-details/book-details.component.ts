@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-
+import { DemoService } from '../services/demo.service'
+import { ActivatedRoute } from '@angular/router'
 @Component({
   selector: 'app-book-details',
   templateUrl: './book-details.component.html',
@@ -8,17 +8,24 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class BookDetailsComponent implements OnInit {
 
-    id: number;
-    private sub: any;
+  data:any;
+  bookTitle:string;
+  coverSourceUrl:string;
+  isbn: any;
+  isLoading : boolean;
+  constructor(private _bookService: DemoService, private route:ActivatedRoute) { }
 
-    constructor(private route: ActivatedRoute) {}
+  ngOnInit() {
+    this.isbn = this.route.snapshot.params['isbn'];
+    this.coverSourceUrl=this._bookService.getBookCover(this.isbn,'L');
+    this.isLoading = true;
+    this._bookService.getBookDetails(this.isbn).subscribe(
+        (data:any)=>{
+          console.log(data);
+          error => {
+            alert('error has occured');
+          }
+  });
 
-    ngOnInit() {
-      this.sub = this.route.params.subscribe(params => {
-         this.id = +params['id']; // (+) converts string 'id' to a number
-        console.log(this.id);
-         // In a real app: dispatch action to load the details here.
-      });
-    }
-
+}
 }
